@@ -102,9 +102,10 @@
   Copyright (C) 2017 Mario Ban
 */
 
+
 #ifndef _SIMPLE_QT_LOGGER_H
 #define _SIMPLE_QT_LOGGER_H
-
+#include "simpleqtlogger_global.h"
 #include <QObject>
 #include <QString>
 #include <QTextStream>
@@ -207,7 +208,7 @@ const QString CONSOLE_COLOR_ANSI_ESC_CODES_FUNCTION  = "\033[0;38;2;0;205;0m";  
 const QString CONSOLE_COLOR_ANSI_ESC_CODES_RESET     = "\033[0m";      // reset all attributes
 
 // Log-level
-typedef enum {
+typedef  enum {
   LogLevel_FATAL = 0, // Fatal error, the program execution has to be aborted
   LogLevel_ERROR,     // An error, that challenges the core operation
   LogLevel_WARNING,   // A warning, signalizing a deformity, without challenging the core operation
@@ -228,7 +229,7 @@ extern bool ENABLE_LOG_SINK_QDEBUG;  // Log-sink: true: enable, false: disable, 
 extern bool ENABLE_LOG_SINK_SIGNAL;  // Log-sink: true: enable, false: disable, default: false
 
 // Log-level (adjust at run-time)
-struct EnableLogLevels {
+struct  SIMPLEQTLOGGERSHARED_EXPORT EnableLogLevels {
   bool logLevel_FATAL;    // Log-level: true: enable, false: disable, default: true
   bool logLevel_ERROR;    // Log-level: true: enable, false: disable, default: true
   bool logLevel_WARNING;  // Log-level: true: enable, false: disable, default: true
@@ -240,7 +241,8 @@ struct EnableLogLevels {
   EnableLogLevels();
   bool enabled(LogLevel logLevel) const;
 };
-extern EnableLogLevels ENABLE_LOG_LEVELS;
+extern SIMPLEQTLOGGERSHARED_EXPORT EnableLogLevels ENABLE_LOG_LEVELS;
+
 
 // Log-function stack-trace
 extern bool ENABLE_FUNCTION_STACK_TRACE; // Log-function stack-trace: true: enable, false: disable, default: true
@@ -303,7 +305,7 @@ extern bool ENABLE_CONSOLE_TRIMMED; // Whitespaces trimmed for sink console: tru
 
 // -------------------------------------------------------------------------------------------------
 
-class Sink : public QObject
+class SIMPLEQTLOGGERSHARED_EXPORT Sink : public QObject
 {
   Q_OBJECT
 
@@ -339,7 +341,7 @@ private:
 
 // -------------------------------------------------------------------------------------------------
 
-class SinkFileLog : public Sink
+class SIMPLEQTLOGGERSHARED_EXPORT SinkFileLog : public Sink
 {
   Q_OBJECT
 
@@ -373,7 +375,7 @@ private:
 
 // -------------------------------------------------------------------------------------------------
 
-class SinkConsoleLog : public Sink
+class SIMPLEQTLOGGERSHARED_EXPORT SinkConsoleLog : public Sink
 {
   Q_OBJECT
 
@@ -392,7 +394,7 @@ private:
 
 // -------------------------------------------------------------------------------------------------
 
-class SinkQDebugLog : public Sink
+class SIMPLEQTLOGGERSHARED_EXPORT SinkQDebugLog : public Sink
 {
   Q_OBJECT
 
@@ -411,7 +413,7 @@ private:
 
 // -------------------------------------------------------------------------------------------------
 
-class SinkSignalLog : public Sink
+class SIMPLEQTLOGGERSHARED_EXPORT SinkSignalLog : public Sink
 {
   Q_OBJECT
 
@@ -433,7 +435,7 @@ private:
 
 // -------------------------------------------------------------------------------------------------
 
-class SimpleQtLogger : public QObject
+class SIMPLEQTLOGGERSHARED_EXPORT SimpleQtLogger : public QObject
 {
   Q_OBJECT
 
@@ -509,7 +511,7 @@ private:
 
 #if ENABLE_SQTL_LOG_LEVEL_FUNCTION > 0
 
-class SimpleQtLoggerFunc
+class SIMPLEQTLOGGERSHARED_EXPORT SimpleQtLoggerFunc
 {
 public:
   SimpleQtLoggerFunc(const QString& text, const QString& functionName, const QString& fileName, unsigned int lineNumber);
